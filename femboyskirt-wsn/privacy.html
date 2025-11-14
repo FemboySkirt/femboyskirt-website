@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data: https:;
+               connect-src 'self';
+               frame-ancestors 'none';
+               base-uri 'self';
+               form-action 'self';">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - FemboySkirt</title>
+    <style>
+        /* === БАЗОВЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: #0d1117;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* === HEADER === */
+        .legal-header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #30363d;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff85a2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .legal-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #8b949e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ff85a2;
+        }
+
+        .nav-link.active {
+            color: #ff85a2;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff85a2;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* === MAIN CONTENT === */
+        .legal-hero {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            padding: 160px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 133, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 162, 200, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .legal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .legal-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8, #a2d2c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .legal-subtitle {
+            font-size: 1.3rem;
+            color: #c8a2c8;
+            margin-bottom: 40px;
+            font-weight: 500;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* === CONTENT SECTIONS === */
+        .legal-content {
+            padding: 80px 0;
+            background: #0d1117;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .legal-section {
+            margin-bottom: 50px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 133, 162, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .legal-section:hover::before {
+            left: 100%;
+        }
+
+        .legal-section:hover {
+            border-color: #ff85a2;
+            box-shadow: 0 10px 40px rgba(255, 133, 162, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #a2d2c8;
+            font-weight: 600;
+        }
+
+        .section-content {
+            color: #8b949e;
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .section-content ul {
+            margin: 20px 0;
+            padding-left: 25px;
+        }
+
+        .section-content li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .section-content li::before {
+            content: '•';
+            color: #ff85a2;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        .highlight-box {
+            background: rgba(162, 210, 200, 0.1);
+            border: 1px solid rgba(162, 210, 200, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            color: #a2d2c8;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #0d1117;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .data-table th {
+            background: rgba(255, 133, 162, 0.1);
+            color: #ff85a2;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 133, 162, 0.05);
+        }
+
+        /* === BACK BUTTON === */
+        .back-section {
+            padding: 40px 0;
+            text-align: center;
+            background: #161b22;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 133, 162, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 133, 162, 0.4);
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .legal-nav {
+                gap: 20px;
+            }
+            
+            .legal-title {
+                font-size: 2.5rem;
+            }
+            
+            .legal-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .legal-section {
+                padding: 30px 25px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-title {
+                font-size: 2rem;
+            }
+            
+            .legal-nav {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .legal-section {
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<!-- Protection against copying -->
+<script>
+    class CopyProtection {
+        static init() {
+            this.disableTextSelection();
+            this.disableRightClick();
+            this.disableKeyboardCopy();
+            this.disableDrag();
+            this.addCopyProtectionMessage();
+        }
+
+        // Отключаем выделение текста
+        static disableTextSelection() {
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // CSS защита
+            const style = document.createElement('style');
+            style.textContent = `
+                body {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    -webkit-touch-callout: none;
+                }
+                
+                /* Разрешаем выделение в формах */
+                input, textarea, .form-input, .form-textarea {
+                    -webkit-user-select: text !important;
+                    -moz-user-select: text !important;
+                    -ms-user-select: text !important;
+                    user-select: text !important;
+                }
+                
+                /* Эффект при попытке выделения */
+                body::selection {
+                    background: rgba(255, 133, 162, 0.1);
+                }
+                body::-moz-selection {
+                    background: rgba(255, 133, 162, 0.1);
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Отключаем правый клик
+        static disableRightClick() {
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Right-click is disabled');
+                return false;
+            });
+        }
+
+        // Отключаем копирование через клавиатуру
+        static disableKeyboardCopy() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+C, Ctrl+V, Ctrl+A, Ctrl+U, F12
+                if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || 
+                                 e.key === 'v' || e.key === 'V' ||
+                                 e.key === 'a' || e.key === 'A' ||
+                                 e.key === 'u' || e.key === 'U')) {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Copy-paste is disabled');
+                    return false;
+                }
+                
+                // Block F12 (DevTools)
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Developer tools are disabled');
+                    return false;
+                }
+                
+                // Block Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+                if (e.ctrlKey && e.shiftKey && 
+                   (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Developer tools are disabled');
+                    return false;
+                }
+            });
+
+            // Перехватываем событие копирования
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                
+                // Можно добавить свой текст в буфер обмена
+                const selection = window.getSelection().toString();
+                if (selection.length > 0) {
+                    e.clipboardData.setData('text/plain', '🔒 Content is protected - FemboySkirt');
+                    CopyProtection.showProtectionMessage('Content copying is disabled');
+                }
+                return false;
+            });
+
+            // Перехватываем событие вставки
+            document.addEventListener('paste', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Pasting is disabled');
+                return false;
+            });
+
+            // Перехватываем событие вырезания
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Cutting is disabled');
+                return false;
+            });
+        }
+
+        // Отключаем перетаскивание
+        static disableDrag() {
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+
+        // Показываем сообщение о защите
+        static showProtectionMessage(message) {
+            // Удаляем старые сообщения
+            document.querySelectorAll('.protection-message').forEach(msg => msg.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'protection-message';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 133, 162, 0.95);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                font-weight: 600;
+                font-size: 16px;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(255, 133, 162, 0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                animation: protectionPulse 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Авто-удаление через 2 секунды
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'protectionFadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 2000);
+        }
+
+        // Добавляем сообщение о защите в футер
+        static addCopyProtectionMessage() {
+            const protectionNotice = document.createElement('div');
+            protectionNotice.className = 'protection-notice';
+            protectionNotice.innerHTML = `
+                <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255, 133, 162, 0.1); border-radius: 8px; border: 1px solid rgba(255, 133, 162, 0.3);">
+                    <p style="color: #ff85a2; margin: 0; font-size: 14px;">
+                        <strong>🔒 Content Protection:</strong> Copying text and images is disabled
+                    </p>
+                </div>
+            `;
+            
+            const footer = document.querySelector('.footer .section-container');
+            if (footer) {
+                footer.appendChild(protectionNotice);
+            }
+        }
+    }
+
+    // Добавляем CSS анимации для сообщений
+    const protectionStyles = document.createElement('style');
+    protectionStyles.textContent = `
+        @keyframes protectionPulse {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            70% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes protectionFadeOut {
+            from { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            to { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+        }
+        
+        /* Защита для изображений */
+        img {
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+        
+        /* Дополнительная защита для контента */
+        .hero-title, .hero-subtitle, .hero-description,
+        .feature-title, .feature-description,
+        .section-title, .form-title, .form-subtitle {
+            position: relative;
+        }
+        
+        /* Эффект при наведении на защищенный текст */
+        .hero-title:hover::after,
+        .feature-title:hover::after {
+            content: '🔒';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #ff85a2;
+        }
+    `;
+    document.head.appendChild(protectionStyles);
+
+    // Инициализация защиты при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        CopyProtection.init();
+        console.log('🔒 Copy protection activated');
+    });
+
+    // Дополнительная защита от обхода
+    setInterval(() => {
+        // Периодически проверяем и восстанавливаем защиту
+        const style = document.querySelector('style[data-copy-protection]');
+        if (!style) {
+            CopyProtection.disableTextSelection();
+        }
+    }, 1000);
+</script>
+<body>
+    <!-- HEADER -->
+    <header class="legal-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span>🌸</span>
+                FemboySkirt
+            </a>
+            <nav class="legal-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="terms.html" class="nav-link">Terms of Service</a>
+                <a href="privacy.html" class="nav-link active">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="legal-hero">
+        <div class="legal-container">
+            <h1 class="legal-title">Privacy Policy</h1>
+            <p class="legal-subtitle">Your privacy is our priority. Learn how we protect your information.</p>
+        </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="legal-content">
+        <div class="content-container">
+            <!-- SECTION 1 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">🔒</div>
+                    <h2 class="section-title">1. Information We Collect</h2>
+                </div>
+                <div class="section-content">
+                    <p>We collect information to provide and improve our services. The types of information we collect include:</p>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Purpose</th>
+                                <th>Storage Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Account Information</td>
+                                <td>User authentication and service access</td>
+                                <td>Until account deletion</td>
+                            </tr>
+                            <tr>
+                                <td>Application Data</td>
+                                <td>Processing access requests and communications</td>
+                                <td>30 days after decision</td>
+                            </tr>
+                            <tr>
+                                <td>Usage Analytics</td>
+                                <td>Service improvement and optimization</td>
+                                <td>12 months</td>
+                            </tr>
+                            <tr>
+                                <td>Technical Data</td>
+                                <td>Security and performance monitoring</td>
+                                <td>90 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight-box">
+                        <div class="highlight-title">Minimal Data Collection</div>
+                        <p>We follow the principle of data minimization, collecting only what is necessary to provide our services. We never sell your personal information to third parties.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">🛡️</div>
+                    <h2 class="section-title">2. How We Use Your Information</h2>
+                </div>
+                <div class="section-content">
+                    <p>Your information is used solely for legitimate business purposes:</p>
+                    <ul>
+                        <li><strong>Service Provision:</strong> To provide, maintain, and improve our services</li>
+                        <li><strong>Communication:</strong> To send important updates and respond to inquiries</li>
+                        <li><strong>Security:</strong> To protect against fraud, abuse, and security threats</li>
+                        <li><strong>Compliance:</strong> To meet legal obligations and enforce our terms</li>
+                        <li><strong>Analytics:</strong> To understand usage patterns and optimize user experience</li>
+                    </ul>
+                    
+                    <p>We process your data based on the following legal grounds:</p>
+                    <ul>
+                        <li>Your consent for specific purposes</li>
+                        <li>Contractual necessity for service delivery</li>
+                        <li>Legal compliance requirements</li>
+                        <li>Legitimate business interests</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">🔐</div>
+                    <h2 class="section-title">3. Data Protection & Security</h2>
+                </div>
+                <div class="section-content">
+                    <p>We implement comprehensive security measures to protect your information:</p>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-title">Security Measures</div>
+                        <ul>
+                            <li>End-to-end encryption for sensitive data transmission</li>
+                            <li>Regular security audits and vulnerability assessments</li>
+                            <li>Access controls and authentication mechanisms</li>
+                            <li>Secure data storage with redundancy</li>
+                            <li>Incident response and breach notification procedures</li>
+                        </ul>
+                    </div>
+
+                    <p>While we implement robust security measures, no method of transmission over the Internet or electronic storage is 100% secure. We continuously work to maintain the highest security standards.</p>
+                </div>
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">📋</div>
+                    <h2 class="section-title">4. Your Rights & Control</h2>
+                </div>
+                <div class="section-content">
+                    <p>You have the following rights regarding your personal information:</p>
+                    <ul>
+                        <li><strong>Access:</strong> Request a copy of your personal data</li>
+                        <li><strong>Correction:</strong> Update or correct inaccurate information</li>
+                        <li><strong>Deletion:</strong> Request deletion of your personal data</li>
+                        <li><strong>Restriction:</strong> Limit how we use your information</li>
+                        <li><strong>Portability:</strong> Receive your data in a machine-readable format</li>
+                        <li><strong>Objection:</strong> Object to certain processing activities</li>
+                    </ul>
+
+                    <p>To exercise these rights, contact us through our support channels. We will respond to all legitimate requests within 30 days.</p>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-title">Withdrawing Consent</div>
+                        <p>You may withdraw your consent for data processing at any time. Note that withdrawal may affect our ability to provide certain services.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">🌐</div>
+                    <h2 class="section-title">5. Third-Party Services</h2>
+                </div>
+                <div class="section-content">
+                    <p>We may use third-party services that process limited information:</p>
+                    <ul>
+                        <li><strong>Analytics Services:</strong> To understand usage patterns (anonymous data only)</li>
+                        <li><strong>Hosting Providers:</strong> For secure data storage and processing</li>
+                        <li><strong>Communication Tools:</strong> For customer support and notifications</li>
+                    </ul>
+                    
+                    <p>All third-party providers are carefully vetted and required to maintain appropriate security measures and data protection standards.</p>
+                </div>
+            </div>
+
+            <!-- SECTION 6 -->
+            <div class="legal-section">
+                <div class="section-header">
+                    <div class="section-icon">📅</div>
+                    <h2 class="section-title">6. Data Retention & Deletion</h2>
+                </div>
+                <div class="section-content">
+                    <p>We retain your personal information only for as long as necessary:</p>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data Category</th>
+                                <th>Retention Period</th>
+                                <th>Basis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Active Account Data</td>
+                                <td>Duration of account activity</td>
+                                <td>Service provision</td>
+                            </tr>
+                            <tr>
+                                <td>Inactive Accounts</td>
+                                <td>24 months after last activity</td>
+                                <td>User convenience</td>
+                            </tr>
+                            <tr>
+                                <td>Application Records</td>
+                                <td>12 months after decision</td>
+                                <td>Legal compliance</td>
+                            </tr>
+                            <tr>
+                                <td>Security Logs</td>
+                                <td>90 days</td>
+                                <td>Security purposes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>You may request account deletion at any time. Upon deletion, we will remove your personal data from our active systems within 30 days.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BACK BUTTON -->
+    <section class="back-section">
+        <div class="content-container">
+            <a href="index.html" class="back-button">
+                ← Return to Homepage
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Simple page load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.legal-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

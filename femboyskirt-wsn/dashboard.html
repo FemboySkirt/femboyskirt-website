@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data: https:;
+               connect-src 'self';
+               frame-ancestors 'none';
+               base-uri 'self';
+               form-action 'self';">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FemboySkirt</title>
+    <style>
+        /* === БАЗОВЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: #0d1117;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* === AUTH REQUIRED MESSAGE === */
+        .auth-required {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: #0d1117;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-message {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .auth-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .auth-title {
+            font-size: 2rem;
+            color: #ff85a2;
+            margin-bottom: 15px;
+        }
+
+        .auth-description {
+            color: #8b949e;
+            margin-bottom: 30px;
+        }
+
+        .auth-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 133, 162, 0.3);
+        }
+
+        /* === HEADER === */
+        .dashboard-header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #30363d;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff85a2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #8b949e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ff85a2;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff85a2;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .logout-btn {
+            background: rgba(218, 54, 51, 0.2);
+            color: #da3633;
+            border: 1px solid #da3633;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: #da3633;
+            color: white;
+        }
+
+        /* === MAIN CONTENT === */
+        .dashboard-main {
+            padding: 140px 0 80px;
+            min-height: 100vh;
+            background: #0d1117;
+            position: relative;
+        }
+
+        .dashboard-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 133, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200, 162, 200, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === WELCOME SECTION === */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8, #a2d2c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === DASHBOARD GRID === */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* === DOWNLOAD SECTION === */
+        .download-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 133, 162, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-section:hover::before {
+            left: 100%;
+        }
+
+        .download-section:hover {
+            border-color: #ff85a2;
+            box-shadow: 0 15px 50px rgba(255, 133, 162, 0.15);
+        }
+
+        .download-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .download-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #ff85a2;
+            font-weight: 700;
+        }
+
+        .download-description {
+            color: #8b949e;
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 133, 162, 0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 133, 162, 0.4);
+        }
+
+        .download-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .download-info {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(162, 210, 200, 0.1);
+            border: 1px solid rgba(162, 210, 200, 0.3);
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .info-title {
+            color: #a2d2c8;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-list {
+            color: #8b949e;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: '•';
+            color: #ff85a2;
+            position: absolute;
+            left: 0;
+        }
+
+        /* === USER INFO SECTION === */
+        .user-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .user-section:hover {
+            border-color: #a2d2c8;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #a2d2c8;
+            margin-bottom: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '👤';
+            font-size: 1.2rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #8b949e;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .tier-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tier-premium {
+            background: linear-gradient(45deg, #ff85a2, #c8a2c8);
+            color: white;
+        }
+
+        .tier-approved {
+            background: rgba(162, 210, 200, 0.2);
+            color: #a2d2c8;
+            border: 1px solid #a2d2c8;
+        }
+
+        .tier-pending {
+            background: rgba(255, 183, 162, 0.2);
+            color: #ffb7a2;
+            border: 1px solid #ffb7a2;
+        }
+
+        /* === STATS SECTION === */
+        .stats-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .stats-section:hover {
+            border-color: #c8a2c8;
+        }
+
+        .stats-section .section-title::before {
+            content: '📊';
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 133, 162, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 133, 162, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 133, 162, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff85a2;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        /* === FOOTER === */
+        .dashboard-footer {
+            background: #161b22;
+            padding: 40px 0;
+            border-top: 1px solid #30363d;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-text {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-link {
+            color: #a2d2c8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-link:hover {
+            color: #ff85a2;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #ff85a2;
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 968px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .user-section {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+            
+            .download-section {
+                padding: 35px 25px;
+            }
+            
+            .download-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            
+            .download-section {
+                padding: 30px 20px;
+            }
+            
+            .download-button {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .user-section, .stats-section {
+                padding: 25px 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<!-- Protection against copying -->
+<script>
+    class CopyProtection {
+        static init() {
+            this.disableTextSelection();
+            this.disableRightClick();
+            this.disableKeyboardCopy();
+            this.disableDrag();
+            this.addCopyProtectionMessage();
+        }
+
+        // Отключаем выделение текста
+        static disableTextSelection() {
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // CSS защита
+            const style = document.createElement('style');
+            style.textContent = `
+                body {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    -webkit-touch-callout: none;
+                }
+                
+                /* Разрешаем выделение в формах */
+                input, textarea, .form-input, .form-textarea {
+                    -webkit-user-select: text !important;
+                    -moz-user-select: text !important;
+                    -ms-user-select: text !important;
+                    user-select: text !important;
+                }
+                
+                /* Эффект при попытке выделения */
+                body::selection {
+                    background: rgba(255, 133, 162, 0.1);
+                }
+                body::-moz-selection {
+                    background: rgba(255, 133, 162, 0.1);
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Отключаем правый клик
+        static disableRightClick() {
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Right-click is disabled');
+                return false;
+            });
+        }
+
+        // Отключаем копирование через клавиатуру
+        static disableKeyboardCopy() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+C, Ctrl+V, Ctrl+A, Ctrl+U, F12
+                if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || 
+                                 e.key === 'v' || e.key === 'V' ||
+                                 e.key === 'a' || e.key === 'A' ||
+                                 e.key === 'u' || e.key === 'U')) {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Copy-paste is disabled');
+                    return false;
+                }
+                
+                // Block F12 (DevTools)
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Developer tools are disabled');
+                    return false;
+                }
+                
+                // Block Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+                if (e.ctrlKey && e.shiftKey && 
+                   (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+                    e.preventDefault();
+                    CopyProtection.showProtectionMessage('Developer tools are disabled');
+                    return false;
+                }
+            });
+
+            // Перехватываем событие копирования
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                
+                // Можно добавить свой текст в буфер обмена
+                const selection = window.getSelection().toString();
+                if (selection.length > 0) {
+                    e.clipboardData.setData('text/plain', '🔒 Content is protected - FemboySkirt');
+                    CopyProtection.showProtectionMessage('Content copying is disabled');
+                }
+                return false;
+            });
+
+            // Перехватываем событие вставки
+            document.addEventListener('paste', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Pasting is disabled');
+                return false;
+            });
+
+            // Перехватываем событие вырезания
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+                CopyProtection.showProtectionMessage('Cutting is disabled');
+                return false;
+            });
+        }
+
+        // Отключаем перетаскивание
+        static disableDrag() {
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+
+        // Показываем сообщение о защите
+        static showProtectionMessage(message) {
+            // Удаляем старые сообщения
+            document.querySelectorAll('.protection-message').forEach(msg => msg.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'protection-message';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 133, 162, 0.95);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                font-weight: 600;
+                font-size: 16px;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(255, 133, 162, 0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                animation: protectionPulse 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Авто-удаление через 2 секунды
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'protectionFadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 2000);
+        }
+
+        // Добавляем сообщение о защите в футер
+        static addCopyProtectionMessage() {
+            const protectionNotice = document.createElement('div');
+            protectionNotice.className = 'protection-notice';
+            protectionNotice.innerHTML = `
+                <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255, 133, 162, 0.1); border-radius: 8px; border: 1px solid rgba(255, 133, 162, 0.3);">
+                    <p style="color: #ff85a2; margin: 0; font-size: 14px;">
+                        <strong>🔒 Content Protection:</strong> Copying text and images is disabled
+                    </p>
+                </div>
+            `;
+            
+            const footer = document.querySelector('.footer .section-container');
+            if (footer) {
+                footer.appendChild(protectionNotice);
+            }
+        }
+    }
+
+    // Добавляем CSS анимации для сообщений
+    const protectionStyles = document.createElement('style');
+    protectionStyles.textContent = `
+        @keyframes protectionPulse {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            70% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes protectionFadeOut {
+            from { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            to { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+        }
+        
+        /* Защита для изображений */
+        img {
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+        
+        /* Дополнительная защита для контента */
+        .hero-title, .hero-subtitle, .hero-description,
+        .feature-title, .feature-description,
+        .section-title, .form-title, .form-subtitle {
+            position: relative;
+        }
+        
+        /* Эффект при наведении на защищенный текст */
+        .hero-title:hover::after,
+        .feature-title:hover::after {
+            content: '🔒';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #ff85a2;
+        }
+    `;
+    document.head.appendChild(protectionStyles);
+
+    // Инициализация защиты при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        CopyProtection.init();
+        console.log('🔒 Copy protection activated');
+    });
+
+    // Дополнительная защита от обхода
+    setInterval(() => {
+        // Периодически проверяем и восстанавливаем защиту
+        const style = document.querySelector('style[data-copy-protection]');
+        if (!style) {
+            CopyProtection.disableTextSelection();
+        }
+    }, 1000);
+</script>
+<body>
+    <!-- AUTH REQUIRED MESSAGE -->
+    <section class="auth-required hidden" id="authRequired">
+        <div class="auth-message">
+            <span class="auth-icon">🔒</span>
+            <h2 class="auth-title">Authentication Required</h2>
+            <p class="auth-description">Please log in to access your dashboard</p>
+            <a href="login.html" class="auth-button">Go to Login</a>
+        </div>
+    </section>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div id="dashboardContent" class="hidden">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <div class="header-container">
+                <a href="index.html" class="logo">
+                    <span>🌸</span>
+                    FemboySkirt
+                </a>
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="terms.html" class="nav-link">Terms</a>
+                    <a href="privacy.html" class="nav-link">Privacy</a>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="dashboard-main">
+            <div class="dashboard-container">
+                <!-- WELCOME SECTION -->
+                <section class="welcome-section">
+                    <h1 class="welcome-title" id="welcomeUser">Welcome to Your Dashboard</h1>
+                    <p class="welcome-subtitle">Access your exclusive tools and manage your account</p>
+                </section>
+
+                <!-- DASHBOARD GRID -->
+                <div class="dashboard-grid">
+                    <!-- DOWNLOAD SECTION -->
+                    <section class="download-section">
+                        <span class="download-icon">🚀</span>
+                        <h2 class="download-title">Download Installer</h2>
+                        <p class="download-description">
+                            Get the latest version of FemboySkirt utility. 
+                            Simple installation, automatic updates, and premium support included.
+                        </p>
+                        
+                        <button class="download-button" id="downloadBtn">
+                            <span>📥 Download Now</span>
+                        </button>
+
+                        <div class="download-info">
+                            <div class="info-title">Installation Guide</div>
+                            <ul class="info-list">
+                                <li>Run the installer as Administrator</li>
+                                <li>Follow the on-screen instructions</li>
+                                <li>Restart your computer after installation</li>
+                                <li>Launch CS2 to activate features</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- USER INFO SECTION -->
+                    <aside class="user-section">
+                        <h3 class="section-title">Account Information</h3>
+                        <div class="user-info">
+                            <div class="info-item">
+                                <span class="info-label">Username:</span>
+                                <span class="info-value" id="userUsername">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value" id="userEmail">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Account Tier:</span>
+                                <span class="info-value">
+                                    <span class="tier-badge tier-premium" id="userTier">Premium</span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Member Since:</span>
+                                <span class="info-value" id="userSince">December 2024</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- STATS SECTION -->
+                <section class="stats-section">
+                    <h3 class="section-title">Usage Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="statDownloads">0</div>
+                            <div class="stat-label">Total Downloads</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">99.8%</div>
+                            <div class="stat-label">Service Uptime</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">v2.1.4</div>
+                            <div class="stat-label">Current Version</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Premium Support</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <p class="footer-text">FemboySkirt Dashboard &copy; 2024 - Premium Access</p>
+                <div class="footer-links">
+                    <a href="terms.html" class="footer-link">Terms of Service</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Универсальная система для dashboard
+        class DashboardSystem {
+            static STORAGE_KEYS = {
+                USERS: 'femboyskirt_users',
+                AUTH: 'femboyskirt_auth',
+                DOWNLOADS: 'femboyskirt_downloads'
+            };
+
+            static init() {
+                console.log('🔄 Initializing dashboard system...');
+                
+                const user = this.getCurrentUser();
+                
+                if (user) {
+                    console.log('✅ User found:', user.email);
+                    this.showDashboard(user);
+                } else {
+                    console.log('❌ No user found');
+                    this.showAuthRequired();
+                }
+            }
+
+            static getCurrentUser() {
+                try {
+                    const authData = localStorage.getItem(this.STORAGE_KEYS.AUTH);
+                    return authData ? JSON.parse(authData) : null;
+                } catch (error) {
+                    console.error('Error getting user:', error);
+                    return null;
+                }
+            }
+
+            static showAuthRequired() {
+                document.getElementById('authRequired').classList.remove('hidden');
+                document.getElementById('dashboardContent').classList.add('hidden');
+            }
+
+            static showDashboard(user) {
+                document.getElementById('authRequired').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                
+                this.loadUserData(user);
+                this.loadStatistics();
+                this.setupEventListeners();
+            }
+
+            static loadUserData(user) {
+                document.getElementById('welcomeUser').textContent = `Welcome back, ${user.username || user.email.split('@')[0]}!`;
+                document.getElementById('userUsername').textContent = user.username || 'User';
+                document.getElementById('userEmail').textContent = user.email || 'N/A';
+                
+                const tier = user.tier || 'premium';
+                const tierElement = document.getElementById('userTier');
+                tierElement.textContent = tier.charAt(0).toUpperCase() + tier.slice(1);
+                tierElement.className = `tier-badge tier-${tier}`;
+            }
+
+            static loadStatistics() {
+                // Загружаем счетчик загрузок из localStorage
+                const downloadCount = this.getDownloadCount();
+                document.getElementById('statDownloads').textContent = downloadCount;
+            }
+
+            static getDownloadCount() {
+                try {
+                    return parseInt(localStorage.getItem(this.STORAGE_KEYS.DOWNLOADS) || '0');
+                } catch (error) {
+                    return 0;
+                }
+            }
+
+            static setupEventListeners() {
+                document.getElementById('downloadBtn').addEventListener('click', () => {
+                    this.handleDownload();
+                });
+            }
+
+            static handleDownload() {
+                const btn = document.getElementById('downloadBtn');
+                const originalText = btn.innerHTML;
+                
+                btn.innerHTML = '<span>⏳ Preparing Download...</span>';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    // Mock download
+                    const content = 'FemboySkirt Premium Installer v2.1.4';
+                    const blob = new Blob([content], { type: 'application/octet-stream' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'FemboySkirt_Installer_v2.1.4.exe';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    // Увеличиваем счетчик и сохраняем
+                    const newCount = this.incrementDownloadCount();
+                    document.getElementById('statDownloads').textContent = newCount;
+
+                    this.showNotification('🎉 Download started successfully!', 'success');
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 2000);
+                }, 1500);
+            }
+
+            static incrementDownloadCount() {
+                try {
+                    const current = this.getDownloadCount();
+                    const newCount = current + 1;
+                    localStorage.setItem(this.STORAGE_KEYS.DOWNLOADS, newCount.toString());
+                    console.log('✅ Download count incremented to:', newCount);
+                    return newCount;
+                } catch (error) {
+                    console.error('Error incrementing download count:', error);
+                    return 0;
+                }
+            }
+
+            static showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#238636' : '#da3633'};
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    border: 1px solid ${type === 'success' ? '#2ea043' : '#f85149'};
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    z-index: 10000;
+                    max-width: 400px;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.remove(), 4000);
+            }
+        }
+
+        // Глобальная функция logout
+        window.logout = function() {
+            console.log('🚪 Logging out...');
+            localStorage.removeItem('femboyskirt_auth');
+            window.location.href = 'index.html';
+        };
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            DashboardSystem.init();
+        });
+    </script>
+</body>
+</html>
